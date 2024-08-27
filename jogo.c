@@ -12,7 +12,11 @@ void newGame(int numPlayers, int numCards)
   gameCardList = fillPokeList(gameCardList, 1);
   int numPlayersJogaveis = numPlayers;
   if(numPlayers == 1) numPlayersJogaveis = numPlayersJogaveis+1;
-  
+ 
+  PlayerStack *playersStack = createPlayerStack();
+
+  int winner;
+
   Deck *decks[numPlayersJogaveis];
   Player *players[numPlayersJogaveis];
   
@@ -20,6 +24,7 @@ void newGame(int numPlayers, int numCards)
   for(int i = 0; i< numPlayersJogaveis; i++){
     decks[i] = newDeck();
     players[i] = newPlayer(decks[i]);
+    players[i]->id = i+1;
   }
 
 //Daí eu posso distribuir o numero de cartas para cada player:
@@ -44,7 +49,8 @@ void newGame(int numPlayers, int numCards)
                 players[currentPlayer]->deck->top->cards->speed, players[currentPlayer]->deck->top->cards->total);
 
 
-      int choose, maxStat, winner = currentPlayer;
+      int choose, maxStat; 
+      winner = currentPlayer;
       printf("Choose an atribute:\n(1 - HP / 2 - Attack / 3 - Defense / 4 - Sp_Attack / 5 - Sp_Def / 6 - Speed / 7 - Total)\n\n");
       if(numPlayers == 1 && currentPlayer == 1){ 
         choose = (rand() % 7) + 1;
@@ -127,11 +133,21 @@ void newGame(int numPlayers, int numCards)
 
                 if (isEmpty(players[i]->deck)) {
                 printf("Player #%d is out of the game!\n", i + 1);
+                pushPlayer(&playersStack, players[i]);
                 }
             }
       }
     }
   }
+
+  printf("Final Ranking\n");
+  int rank = numPlayersJogaveis;
+  while(!isStackEmpty(playersStack)){
+    Player *play = popPlayer(&playersStack);
+    printf("#%d - Player #%d\n", rank, play->id);
+    rank--;
+  }
+  printf("#%d - Player #%d (Winner)\n", rank, winner +1);
 }
 //A comparação de cards deve ser algo do tipo:
 //  switch (escolha) {

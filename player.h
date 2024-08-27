@@ -7,15 +7,20 @@
 
 typedef struct player
 {
-  char username[MAX_NAME];
+  int id;
   Deck *deck;
-  struct player *prevPlayer;
-  struct player *nextPlayer;
 }Player;
 
+typedef struct PlayerStack {
+    Player *player;
+    struct PlayerStack *next;
+} PlayerStack;
+
 Player *newPlayer(Deck *deck);
-Player *findPlayer(Player *player, int playerPos);
-int removePLayer(Player *player, int pos);
+PlayerStack* createPlayerStack();
+void pushPlayer(PlayerStack **stack, Player *player);
+Player* popPlayer(PlayerStack **stack);
+bool isStackEmpty(PlayerStack *stack);
 
 
 #endif

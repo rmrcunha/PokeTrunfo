@@ -3,43 +3,31 @@
 
 Player *newPlayer(Deck *deck){
   Player *createdPLayer = malloc(sizeof(Player));
-  
-  createdPLayer->prevPlayer = NULL;
-  createdPLayer->nextPlayer = NULL;
   createdPLayer->deck = deck; 
   
   return createdPLayer;
 }
 
-Player *findPlayer(Player *player, int playerPos){
-  Player *currentPlayer = player;
-  for(int i=1;i<=playerPos;i++) currentPlayer= currentPlayer->nextPlayer;
-
-  return currentPlayer;
+PlayerStack* createPlayerStack() {
+    return NULL;
 }
 
-int removePLayer(Player *player, int pos){
-  if(player == NULL) return 1;
+void pushPlayer(PlayerStack **stack, Player *player) {
+    PlayerStack *newNode = (PlayerStack*) malloc(sizeof(PlayerStack));
+    newNode->player = player;
+    newNode->next = *stack;
+    *stack = newNode;
+}
 
-  Player *currentPlayer = player;
+Player* popPlayer(PlayerStack **stack) {
+    if (*stack == NULL) return NULL;
+    PlayerStack *temp = *stack;
+    Player *player = temp->player;
+    *stack = (*stack)->next;
+    free(temp);
+    return player;
+}
 
-  for(int i = 1; i<= pos; i++){
-    currentPlayer = currentPlayer->nextPlayer;
-  }
-  if(currentPlayer == NULL) return 1;
-
-  if(currentPlayer->prevPlayer){
-    currentPlayer->prevPlayer->nextPlayer =   currentPlayer->nextPlayer;
-  }
-  if(currentPlayer->nextPlayer){
-    currentPlayer->nextPlayer->prevPlayer = currentPlayer->prevPlayer;
-  }
-
-  if(player == currentPlayer){
-    player= currentPlayer->nextPlayer;
-  }
-  
-  free(currentPlayer);
-
-  return 0;
+bool isStackEmpty(PlayerStack *stack) {
+    return stack == NULL;
 }

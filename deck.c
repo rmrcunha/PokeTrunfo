@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//nova fila
-//fila possui um ponteiro para o topo e outro para o fundo
 Deck *newDeck()
 {
   Deck* cardDeck = (Deck*)malloc(sizeof(Deck));
@@ -20,7 +18,6 @@ Card *newCard(Pokemon *p)
 {
   Card *d = (Card*)malloc(sizeof(Card));
   d->cards = p;
-  //d->next = NULL;
   return d;
 }
 

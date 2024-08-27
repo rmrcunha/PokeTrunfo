@@ -22,10 +22,8 @@ typedef struct list
   struct list *prev;
   struct list *next;
 } List;
-//Mudar stack para doubly linked list
-//Para colocar os pokemons no deck de 
-//forma aleatoria devo implementar uma
-//funcao de tirar o pokemon da dll
+
+
 Pokemon *createPokeList();
 void printPokedex(List *pList);
 void convert_to_uppercase(char *toupper_pokemon_name);

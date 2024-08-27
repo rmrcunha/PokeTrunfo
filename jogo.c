@@ -7,7 +7,6 @@
 
 void newGame(int numPlayers, int numCards)
 { 
-//começo do jogo deve ser + ou - isso aqui: crio um novo player e crio um deck para ele.
   List *gameCardList = newPokemonList();
   gameCardList = fillPokeList(gameCardList, 1);
   int numPlayersJogaveis = numPlayers;
@@ -27,7 +26,6 @@ void newGame(int numPlayers, int numCards)
     players[i]->id = i+1;
   }
 
-//Daí eu posso distribuir o numero de cartas para cada player:
   for(int i = 0; i <numCards/numPlayersJogaveis;i++){
     for(int j = 0; j<numPlayersJogaveis; j++){
       if(gameCardList !=NULL &&gameCardList->poke !=NULL){
@@ -149,12 +147,6 @@ void newGame(int numPlayers, int numCards)
   }
   printf("#%d - Player #%d (Winner)\n", rank, winner +1);
 }
-//A comparação de cards deve ser algo do tipo:
-//  switch (escolha) {
-//    1:players->deck->top->cards->HP;
-//    2:players->deck->top->cards->attack;
-//  }
-//daí armazena o valor escolhido em uma variavel e compara com o dos demais players;
 
 void print_rules(){
     printf("Ol�! Aqui voce pode conferir as regras do jogo! "

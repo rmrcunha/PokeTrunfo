@@ -8,7 +8,6 @@
 #include <stdbool.h>
 
 
-//Func mais feia do que bater na vó
 void printPokedex(List *pList)
 {
   while(pList != NULL)
@@ -27,12 +26,6 @@ void printPokedex(List *pList)
     pList = pList->next;
   }
 }
-
-//Retornar um pokemon aleatorio da stack
-
-//Pokemon pickPoke(Pokemon *list){
- 
-//}
 
 //Mode vai definir se eu vou encher a lista de forma ordenada ou aleatória: 0 - ordenada/ 1 - aleatória
 List *fillPokeList(List *pokeList,int mode)
@@ -115,9 +108,6 @@ List *fillPokeList(List *pokeList,int mode)
   
   return pokeList;
 }
-//código ruim/ 0 escalabilidade/ feito de maneira burra
-//vai funcionar por um motivo que eu desconheço qual seja
-//suco do brainrot
 
 List *removeTop(List* pokeList){
   if(pokeList == NULL){

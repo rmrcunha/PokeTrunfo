@@ -3,8 +3,7 @@
 
 #include <stdbool.h>
 
-#define MAX_NAME 32
-#define MAX_CARDS 1024
+#define MAX_CARDS 821
 
 typedef struct pokemon
 {
@@ -13,16 +12,26 @@ typedef struct pokemon
   int gen, total;
   unsigned int HP, attack, defense, speed, sp_def, sp_attack;
   bool legendary;
-  char name[MAX_NAME];
+  char name[32];
 } Pokemon;
 
-typedef struct stack
+typedef struct list
 {
   int n;
-  struct stack *next;
-} Stack;
-
-void printPokedex(Pokemon *deck);
-void read_pokedex();
+  Pokemon *poke;
+  struct list *prev;
+  struct list *next;
+} List;
+//Mudar stack para doubly linked list
+//Para colocar os pokemons no deck de 
+//forma aleatoria devo implementar uma
+//funcao de tirar o pokemon da dll
+Pokemon *createPokeList();
+void printPokedex(List *pList);
+void convert_to_uppercase(char *toupper_pokemon_name);
+void search_pokemon(const char *pokemon_name, List *deck);
+List *fillPokeList(List *pokeList, int mode);
+List *newPokemonList();
+List *removeTop(List *pokeList);
 
 #endif

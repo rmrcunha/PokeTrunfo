@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+//nova fila
+//fila possui um ponteiro para o topo e outro para o fundo
 Deck *newDeck()
 {
   Deck* cardDeck = (Deck*)malloc(sizeof(Deck));
@@ -10,21 +12,28 @@ Deck *newDeck()
   return cardDeck;
 }
 
-Card *newCard(Pokemon c)
+//nova lista
+//lista recebe pokemon
+//crio um novo card "d". o conteudo de é o pokemon.
+//o proximo card é null.
+Card *newCard(Pokemon *p)
 {
   Card *d = (Card*)malloc(sizeof(Card));
-  d->cards = c;
-  d->next = NULL;
+  d->cards = p;
+  //d->next = NULL;
   return d;
 }
-//Implementar card distribution no atual insertCard e fazer um insertCard onde eu não
-//preciso verificar se o deck está cheio.
-void insertCard(Deck *deck, Pokemon c)
+
+void insertCard(Deck *deck, Pokemon *p)
 {
-  Card* temp = newCard(c);
+  if (deck == NULL) {
+    fprintf(stderr, "Error: Deck is NULL.\n");
+    return;
+}
+  Card* temp = newCard(p);
   if(deck->bot==NULL)
   {
-    deck->top =deck->bot;
+    deck->top = temp;
     deck->bot = temp;
     return;
   }
@@ -36,14 +45,15 @@ int loseCard(Deck *deck)
 {
   if(isEmpty(deck)) 
   {
-    return -1;
     deck->bot=NULL; 
+    return -1;
+    
   }
 
   Card* temp = deck->top;
   deck->top=deck->top->next;
   
-  Pokemon c = temp->cards;
+  Pokemon *c = temp->cards;
   free(temp);
 
   return 0;
